@@ -34,7 +34,7 @@ Config.Setup = {
     -- 'metadata' is for QBCore users only
     -- If true, the resource will reward metadata values for 'markedbills'
     -- If false, the resource will reward the item without metadata, and just 1-to-1
-    metadata = true,
+    metadata = false,
     -- Once a store robbery has succesfully started a cooldown begins
     -- This is per-player and not a global cooldown (cooldown is in seconds)
     cooldown = 600,
@@ -53,20 +53,20 @@ Config.Setup = {
 Config.Police = {
     -- Do you want to require police be online in order to rob stores?
     -- Then set require = true! If false, police will not be required
-    require = false,
+    require = true,
     -- If require = true, how many must be online to rob the stores?
-    count = 3,
+    count = 1,
     -- Add your police job(s) below
-    jobs = { 'police', 'sheriff' },
+    jobs = { 'police' },
     -- Set your dispatch system
     -- Available options: 'cd_dispatch', 'ps-dispatch', 'qs-dispatch'
     -- 'core_dispatch', 'rcore_dispatch', aty_dispatch', 'op-dispatch',
     -- 'origen_police', 'emergencydispatch' & 'custom' option
-    dispatch = 'custom',
+    dispatch = 'ps-dispatch',
     -- Risk is a feature you can enable that will increase the players
     -- Reward payout based on the number of police online during the robbery!
     -- Do you want to enable the risk feature?
-    risk = true,
+    risk = false,
     -- If risk = true, percent is how much the reward payout increases
     -- In percentage for EVERY cop online. If percent = 10 and there are
     -- 3 police online, the reward payout will increase 30%
@@ -79,14 +79,14 @@ Config.Police = {
 
 Config.Registers = {
     -- Set the required item name below needed to rob a cash register
-    item = 'lockpick',
+    item = 'advancedlockpick',
     -- Customize the minigame (skillcheck) difficulty below
     minigame = {
         -- Set the skillcheck difficulty levels below
         -- You can set 'easy', 'medium' or 'hard' in any order
         -- And in any amount/quantity - Learn more about the skillcheck
         -- Here: https://overextended.dev/ox_lib/Modules/Interface/Client/skillcheck
-        difficulty = { 'easy', 'easy', 'easy', 'easy', 'easy','easy', },
+        difficulty = { 'easy', 'easy', 'medium', 'medium', 'medium','hard', },
         -- The 'inputs' are the keys that will be used for the skillcheck
         -- Minigame and can be set to any key or keys of your choice
         inputs = { 'W', 'A', 'S', 'D' }
@@ -94,7 +94,7 @@ Config.Registers = {
     -- After a successful register robbery, what item do you want to reward
     -- And how much of it? Set the item = 'name' below and min/max quantites
     -- (this can also can be account, such as: 'cash', 'money' or 'bank')
-    reward = { item = 'black_money', min = 1000, max = 1000 },
+    reward = { item = 'dirtymoney', min = 30000, max = 50000 },
     -- If a player fails to successfully lockpick the register
     -- There is a chance that their lockpick will break. In percentage,
     -- What chance do you want their lockpick to break? To never break, set 0
@@ -103,7 +103,7 @@ Config.Registers = {
     -- After a player succesfully robs a register, there is this "noteChance" they
     -- "Find" the safe's PIN "under the register" and can skip the computer hacking
     -- Step if found. In percentage, what chance do they have to find this note?
-    noteChance = 10
+    noteChance = 0
 }
 
 ----------------------------------------------
@@ -114,7 +114,8 @@ Config.Computers = {
     -- When a player is attempting to hack the computer how many
     -- Attempts do you want to allow? By default, after 3 failed attempts
     -- The robbery will end and not proceed any further
-    maxAttempts = 3,
+    item = 'tablethack',
+    maxAttempts = 10,
     -- Do you want to enable the questionnaire hack? If true, this will replace
     -- The skillcheck hack with a series of questions the player must answer correctly
     questionnaire = false,
@@ -124,7 +125,7 @@ Config.Computers = {
         -- You can set 'easy', 'medium' or 'hard' in any order
         -- And in any amount/quantity - Learn more about the skillcheck
         -- Here: https://overextended.dev/ox_lib/Modules/Interface/Client/skillcheck
-        difficulty = { 'easy', 'easy', 'easy', 'easy', 'easy','easy', },
+        difficulty = { 'easy', 'easy', 'medium', 'medium', 'medium','hard', },
         -- The 'inputs' are the keys that will be used for the skillcheck
         -- Minigame and can be set to any key or keys of your choice
         inputs = { 'W', 'A', 'S', 'D' }
@@ -143,7 +144,7 @@ Config.Safes = {
     -- After a successful safe robbery, what item do you want to reward
     -- And how much of it? Set the item = 'name' below and min/max quantites
     -- (this can also can be account, such as: 'cash', 'money' or 'bank')
-    reward = { item = 'black_money', min = 2000, max = 7000 },
+    reward = { item = 'dirtymoney', min = 80000, max = 100000 },
 }
 
 ----------------------------------------------
@@ -214,7 +215,7 @@ Config.Animations = {
     },
     register = {
         label = 'Grabbing cash..',
-        duration = 30000,
+        duration = 90000,
         position = 'bottom',
         useWhileDead = false,
         canCancel = true,
@@ -228,7 +229,7 @@ Config.Animations = {
     },
     safe = {
         label = 'Looting safe..',
-        duration = 30000,
+        duration = 50000,
         position = 'bottom',
         useWhileDead = false,
         canCancel = false,

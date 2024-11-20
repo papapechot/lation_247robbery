@@ -95,7 +95,7 @@ end
 
 -- Function to handle hacking the computer if required
 local function InitiateComputerHack()
-    activeComputer = false -- Deactive target
+  --  activeComputer = false -- Deactive target
     if failedHack > Config.Computers.maxAttempts then
         activeRegister = false
         activeComputer = false
@@ -104,6 +104,8 @@ local function InitiateComputerHack()
         TriggerServerEvent('lation_247robbery:FailedRobbery')
         return
     end
+    local canStart = lib.callback.await('lation_247robbery:Startcomputer', false)
+    if not canStart then return end
     local dict, anim = Config.Animations.hackPC.animDict, Config.Animations.hackPC.animClip
     lib.requestAnimDict(dict)
     while not HasAnimDictLoaded(dict) do Wait(0) end
@@ -129,6 +131,7 @@ local function InitiateComputerHack()
                 cancel = false,
                 labels = { confirm = alert.labels.confirm }
             })
+            activeComputer = false
             activeSafe = true
         else
             ClearPedTasks(cache.ped)
@@ -158,6 +161,7 @@ local function InitiateComputerHack()
             cancel = false,
             labels = { confirm = alert.labels.confirm }
         })
+        activeComputer = false
         activeSafe = true
     end
 end
@@ -231,6 +235,7 @@ for key, coords in pairs(Config.Locations.Computers) do
         name = 'computer' ..key,
         coords = coords,
         radius = 0.35,
+      --  items = 'tablethack',
         debug = Config.Setup.debug,
         options = {
             {

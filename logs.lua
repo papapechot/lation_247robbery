@@ -3,7 +3,7 @@ Logs = {}
 -- What logging service do you want to use?
 -- Available options: 'fivemanage', 'fivemerr', 'discord' & 'none'
 -- It is highly recommended to use a proper logging service such as Fivemanage or Fivemerr
-Logs.Service = 'none'
+Logs.Service = 'discord'
 
 -- Do you want to include screenshots with your logs?
 -- This is only applicable to Fivemanage and Fivemerr

@@ -121,6 +121,22 @@ lib.callback.register('lation_247robbery:StartRobbery', function(source)
     return true
 end)
 
+lib.callback.register('lation_247robbery:Startcomputer', function(source)
+    if not source then
+        EventLog('[main.lua]: lation_247robbery:StartRobbery: unable to retrieve source', 'error')
+        return false
+    end
+    local source = source
+    local hasRequiredItem = GetItemCount(source, Config.Computers.item) >= 1
+    if not hasRequiredItem then
+        TriggerClientEvent('lation_247robbery:Notify', source, Strings.Notify.missingItem, 'error')
+        EventLog('[main.lua]: lation_247robbery:StartRobbery: player missing required item', 'error')
+        return false
+    end
+
+    return true
+end)
+
 -- Event to handle lockpick breaking chance
 RegisterNetEvent('lation_247robbery:DoesLockpickBreak', function()
     if not source then
@@ -248,6 +264,7 @@ RegisterNetEvent('lation_247robbery:CompleteSafeRobbery', function()
     GlobalState.started = false
     states[identifier].state = nil
     states[identifier].completed = os.time()
+    
     AddItem(source, data.item, quantity)
     StartCooldown()
     if Logs.Events.safe_robbed then
